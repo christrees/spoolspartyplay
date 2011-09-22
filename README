@@ -1,0 +1,162 @@
+Intent:  Test The-M-Project using spools project
+Goal: working spools site based The-M-Project
+DateCreated: 2011.09.22
+DateLast: 2011.08.25 <or look this stuff up on github repo history>
+
+Resources:
+WEB: http://192.168.1.179:9999/spoolspartyplay/
+DEV: ubuntu1010desktop VMWare machine
+FILE: /home/user/Work/spoolspartyplay
+GITHUB https://github.com/christrees/spoolspartyplay
+
+TESTING DOCS: 
+	http://javascriptmvc.com/docs.html#&who=FuncUnit
+	http://docs.jquery.com/QUnit
+
+======================================================================================
+<<<<<<<<<<<<<<<<<
+>>>>>STEP 1 - Setup spoolspartyplay
+<<<<<<<<<<<<<<<<<
+--Well... another framework... This is a framework based on node.js and jquerymobile
+--WHICH is the reason for yet another framework test of spools.
+--The place I started is:
+--BROWSE: http://the-m-project.net/getStarted_helloworld.html
+--So... on the linix box because I getting node to run on windows sucks...
+--(oh... I got the basic stuff running)
+--BROWSE: http://the-m-project.net/getStarted_setup.html
+git clone git://github.com/mwaylabs/Espresso.git
+cd Espresso/
+git submodule update --init
+--EDIT: .profile
+alias espresso="/home/user/themproject/Espresso/bin/espresso.js"
+--NOW start the Spools project...
+user@ubuntu1010desktop:~/Work$ ls
+0_notes  blog  crap  Mongo-Shortener  myFirstProject
+user@ubuntu1010desktop:~/Work$ espresso init -e -p spoolspartyplay
+LOG: /home/user/Work/spoolspartyplay/config.json generated!
+LOG: /home/user/Work/spoolspartyplay/app/main.js generated!
+Project successfully generated!
+LOG: /home/user/Work/spoolspartyplay/app/resources/base/images/Icon@2x.png generated!
+LOG: /home/user/Work/spoolspartyplay/app/resources/base/images/Icon-72.png generated!
+LOG: /home/user/Work/spoolspartyplay/app/resources/base/images/Icon.png generated!
+LOG: /home/user/Work/spoolspartyplay/app/resources/base/style.css generated!
+user@ubuntu1010desktop:~/Work$ cd spoolspartyplay/
+user@ubuntu1010desktop:~/Work/spoolspartyplay$ cp /mnt/hgfs/TEST/README .
+user@ubuntu1010desktop:~/Work/spoolspartyplay$ pwd
+/home/user/Work/spoolspartyplay
+user@ubuntu1010desktop:~/Work/spoolspartyplay$
+--PULL in .gitignore
+user@ubuntu1010desktop:~/Work/spoolspartyplay$ cp /mnt/hgfs/TEST/.gitignore .
+user@ubuntu1010desktop:~/Work/spoolspartyplay$ ls -alu
+total 100
+drwxr-xr-x 5 user user  4096 2011-09-22 17:59 .
+drwxr-xr-x 8 user user  4096 2011-09-22 17:28 ..
+drwxr-xr-x 3 user user  4096 2011-09-22 17:29 app
+-rw-rw-r-- 1 user user   898 2011-09-22 17:29 config.json
+drwxr-xr-x 3 user user  4096 2011-09-22 17:29 frameworks
+-rwxrwxr-x 1 user user   509 2011-09-22 17:59 .gitignore
+drwxr-xr-x 3 user user  4096 2011-09-22 17:29 nbproject
+-rw-r--r-- 1 user user 73332 2011-09-22 17:34 README
+user@ubuntu1010desktop:~/Work/spoolspartyplay$
+--
+--NOW light up and see if we see anything
+--
+user@ubuntu1010desktop:~/Work/spoolspartyplay$ espresso server -p 9999
+--BROWSE: http://192.168.1.179:9999/spoolspartyplay/
+--THAT WORKS... lets git this.
+--Lets commit this
+--SAVE THIS README
+user@ubuntu1010desktop:~/Work/spoolspartyplay$ git init
+user@ubuntu1010desktop:~/Work/spoolspartyplay$ git add .
+user@ubuntu1010desktop:~/Work/spoolspartyplay$ git commit -m "Spools Party Play using The-M-Project Framework"
+user@ubuntu1010desktop:~/Work/spoolspartyplay$ git remote add origin git@github.com:christrees/spoolspartyplay.git
+user@ubuntu1010desktop:~/Work/spoolspartyplay$ git push origin master
+<<<<<<<<<<<<<<<<<
+>>>>>STEP 1 - TEST
+<<<<<<<<<<<<<<<<<
+Browse - https://github.com/christrees/spoolspartyplay/
+Browse - http://192.168.1.179:9999/spoospartyplay/
+SUCCESS>>See what I expect.
+
+==QUICK NOTES==
+n terms of making mobile dev easier, there's a ton of stuff:
+
+http://www.phonegap.com/
+http://www.sencha.com/products/touch/
+http://www.appcelerator.com/
+http://www.jquerymobile.com/
+http://www.jqtouch.com/
+
+http://stackoverflow.com/questions/991764/hiding-title-in-a-fullscreen-mode
+
+https://github.com/paulirish/html5-boilerplate/blob/master/index.html
+http://www.rkblog.rk.edu.pl/w/p/optimizing-websites-iphone-and-android/
+http://stackoverflow.com/questions/90178/make-a-div-fill-the-remaining-screen-space
+
+http://s3.amazonaws.com/jupiter_images/resources/1/javascriptmvc_cheatsheet.pdf
+KILL CACHE: http://forum.javascriptmvc.com/topic/ejs-templates-are-always-cached
+FIREFOX - about:config Type �cache� in the search bar, and look for network.http.use-cache, and double click it to set it to false.
+TEST:
+FuncUnit API: http://javascriptmvc.com/docs.html#&who=FuncUnit
+FuncUnit on Sauce: http://forum.javascriptmvc.com/#Topic/32525000000389015
+C:\Users\ChrisT\workspace\javascriptmvc310\funcunit\settings.js
+var FuncUnitSauceLabsSettings = {
+	browsers: [ '{' + 
+	"username": "<your Sauce Labs username>",' + 
+	'"access-key": "<your Sauce Labs Api Key>",' +
+	'"os": "Windows 2003",' +
+	"browser": "firefox",' + 
+        '"browser-version": "3.6.",' +
+        '"name": "My Tests",' +
+        '"user-extensions-url": "http://<your server>/funcunit/java/user-extensions.js"' +
+	'}'],
+	serverHost: 'ondemand.saucelabs.com',
+	serverPort: 80,
+	jmvcRoot: 'http://<your server>/'
+};
+var FuncUnitLocalSettings = {
+	browsers: ["*firefox", "*iexplore"],
+	jmvcRoot: 'http://localhost/'
+};
+var runFuncUnitLocally = false;
+FuncUnit = (runFuncUnitLocally) ? FuncUnitLocalSettings : FuncUnitSauceLabsSettings;
+
+======================================================================================
+------- copy buffer --------------
+?????????????????????????????????
+<<<<<<<<<<<<<<<<<
+>>>>>STEP x - <step subject>
+<<<<<<<<<<<<<<<<<
+--WHAT the heck to do next... how about blahblah
+--Lets commit this
+--SAVE THIS README
+C:\Users\ChrisT\workspace\javascriptmvc310>git add -u
+C:\Users\ChrisT\workspace\javascriptmvc310>git add .
+C:\Users\ChrisT\workspace\javascriptmvc310>git commit -m "blah blah"
+C:\Users\ChrisT\workspace\javascriptmvc310>git push origin joemod
+[cat@gator1209 ~/public_html/javascriptmvc310]$ git fetch
+[cat@gator1209 ~/public_html/javascriptmvc310]$ git checkout remotes/origin/joemod
+<<<<<<<<<<<<<<<<<
+>>>>>STEP x - TEST
+<<<<<<<<<<<<<<<<<
+Browse - http://js.javascriptmvc310/spools/spools.html
+AUTOTEST: http://js.javascriptmvc310/spools/funcunit.html
+SUCCESS>>
+?FAILURE>>
+??WHAT?>>
+???????????????????????????????????????
+>>>>>UNUSED / NEXT BUG ID BIN<<<<<
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
++++++BUG:1 STATUS-> CLOSED
++++++BUG:2 STATUS-> CLOSED
++++++BUG:3 STATUS-> OPEN
++++++BUG:4 STATUS-> OPEN
++++++BUG:5 STATUS-> CLOSED
++++++BUG:6 STATUS-> CLOSED
++++++BUG:7 STATUS-> CLOSED
++++++BUG:8 STATUS-> OPEN
+>>>>>BUG:8 BEGIN
+<<<<<BUG:8 END
++++++BUG:9 STATUS-> OPEN
+>>>>>BUG:9 BEGIN
+<<<<<BUG:9 END
